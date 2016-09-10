@@ -1,0 +1,53 @@
+<html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+    var buttonState = {
+      button1: false,
+      button2: false,
+      button3: false,
+      button4: false,
+      button5: false
+    };
+    
+    var socket = io.connect('http://192.168.2.5:3000');
+    
+    function toggleButton1(){
+      buttonState.button1 = !buttonState.button1;
+      emit();
+    }
+    
+    function toggleButton2(){
+      buttonState.button2 = !buttonState.button2;
+      emit();
+    }
+    
+    function toggleButton3(){
+      buttonState.button3 = !buttonState.button3;
+      emit();
+    }
+    
+    function toggleButton4(){
+      buttonState.button4 = !buttonState.button4;
+      emit();
+    }
+    
+    function toggleButton5(){
+      buttonState.button5 = !buttonState.button5;
+      emit();
+    }
+
+    function emit(){
+      socket.emit('setButtonState', buttonState);
+    }
+  </script>
+</head>
+<body>
+  <button onclick="toggleButton1()">Toggle button 1</button>
+  <button onclick="toggleButton2()">Toggle button 2</button>
+  <button onclick="toggleButton3()">Toggle button 3</button>
+  <button onclick="toggleButton4()">Toggle button 4</button>
+  <button onclick="toggleButton5()">Toggle button 5</button>
+</body>
+</html>

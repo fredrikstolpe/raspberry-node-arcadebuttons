@@ -1,0 +1,28 @@
+diskutil list
+disk1
+
+diskutil unmountDisk /dev/disk1
+
+sudo dd bs=1m if=2016-05-27-raspbian-jessie-lite.img of=/dev/rdisk1
+
+publish.sh
+--
+#!/bin/bash
+scp -r . pi@192.168.2.5:/opt/deploy/arcadebuttons
+--
+
+chmod +x publish.sh 
+./publish.sh
+
+ssh-keygen -t rsa
+Press enter for default location
+Press enter for blank password
+
+cat ~/.ssh/id_rsa.pub
+Copy content of key
+
+cd ~
+install -d -m 700 ~/.ssh
+nano authorized_keys
+
+nodemon app.js
