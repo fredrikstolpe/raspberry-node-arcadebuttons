@@ -13,21 +13,21 @@ server.listen(3000, function () {
   console.log('Server listening at port 3000');
 });
 
-var button1 = new Pin(11),
-  button2 = new Pin(13),
-  button3 = new Pin(19),
-  button4 = new Pin(21),
-  button5 = new Pin(23);
+var led1 = new Pin(11),
+  led2 = new Pin(13),
+  led3 = new Pin(19),
+  led4 = new Pin(21),
+  led5 = new Pin(23);
 
 Q.all([
-  button1.setupOutput(),
-  button2.setupOutput(),
-  button3.setupOutput(),
-  button4.setupOutput(),
-  button5.setupOutput()
+  led1.setupOutput(),
+  led2.setupOutput(),
+  led3.setupOutput(),
+  led4.setupOutput(),
+  led5.setupOutput()
 ])
 .then(function(){
-  console.log("Buttons initialized");
+  console.log("Leds initialized");
 })
 .catch(function(err){
   console.log(err);
@@ -35,13 +35,23 @@ Q.all([
 
 io.on('connection', function(socket){
   console.log('Socket client connected');
-  socket.on('setButtonState', function (data) {
+  socket.on('setLedState', function (data) {
     console.log(data);
-    button1.write(data.button1);
-    button2.write(data.button2);
-    button3.write(data.button3);
-    button4.write(data.button4);
-    button5.write(data.button5);
+    if (data.led1 != null){
+      led1.write(data.led1);
+    }
+    if (data.led2 != null){
+      led2.write(data.led2);
+    }
+    if (data.led3 != null){
+      led3.write(data.led3);
+    }
+    if (data.led4 != null){
+      led4.write(data.led4);
+    }
+    if (data.led5 != null){
+      led5.write(data.led5);
+    }
   });
 });
 
